@@ -1,0 +1,17 @@
+12/11/2024
+
+existeixen 2 tipus de fitxers a fortran: fixos o lliures. treballarem lliures.
+
+WRITE8(*,'A') * vol dir que ho escriurà a la terminal, A vol dir que s'escriu com una cadena de caracters
+
+si fiquem WRITE(*,*) el programa ho escriura en el format que sigui
+
+& serveix per seguir escrivint el codi en una altra linia
+
+check pagina Fortran land 
+
+WRITE(*,'(2(A,1X,I0,1X))') "El numero triangular 1 + 2 + ... +", n, "es:", suma        el 2 serveix per repetir el format
+
+HUGE() valor mes gran
+.GE. greater or equal
+.GT. greater than
