@@ -1,0 +1,22 @@
+notas Andrea 17-11-2024
+
+1. wsl (abre Ubuntu)
+2. andrea@LAPTOP-UTE9982S:/mnt/c/Users/andre.LAPTOP-UTE9982S/OneDrive/Documentos/UAB/3r Física/MN II/trying fortran (normalment serà el directori)
+   click dret direcctament per copiar algo al powershell
+3. gfortran --version per comprovar la versió
+4. gfortran nom.f90 -o nom 
+5. ./nom  (Execute)
+
+Per accedir com a admin a UBUNTU:
+1. wsl
+2. sudo bash
+3. password
+
+ANOTACIONS:
+1- El nom en '-o' NO POT portar espais ni el del fitxer original tampoc
+2- ls : Per mirar que hi ha al directori on som 
+3- cd : Per anar a una carpeta o lloc. Ex : cd Desktop
+4- Si volem anar a un directori amb noms amb espais podem fer servir : cd " Directori" 
+5- cd .. : per sortir de l'ultima carpeta on hem entrat
+6- Es MOLT IMPORTANT ubicar l'arxiu. Podem sempre trobar-lo a ARXIUS i mirar en Propietats la seva direcció
+7- WRITE(*,('(A,1X,I0)') :    1X un espai ,  I0 un enter 'I' amb cap 0 davant ni darrere ni espais '0'
