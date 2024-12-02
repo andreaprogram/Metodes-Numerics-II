@@ -1,7 +1,8 @@
 Instruccions per manipular arxius (editar-los i tornar-los a penjar)
 
 CODI PYTHON:
-Editem el codi des de Google Colab i a l'acabar, descarreguem la versió i la pengem a GitHub (amb comentaris de les modificacions)
+Editem el codi des de Spyder i a l'acabar, descarreguem la versió i la pengem a GitHub (amb comentaris de les modificacions).
+Per visualitzar cada gràfica podem fer servir el Google Colab conjunt.
 
 LATEX:
-Editem alhora amb Overleaf amb el compte 
+Editem alhora amb Overleaf amb el compte conjunt del grup.
