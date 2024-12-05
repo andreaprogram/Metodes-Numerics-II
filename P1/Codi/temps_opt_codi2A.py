@@ -58,7 +58,7 @@ for s in range(Ta.shape[1]):
 incertesa= 0.25*(Dx**2)*t_0
 
 if t_opt is not None:
-    print("el temps òptim per les condicions del problema és",(t_opt*t_0,"±",incertesa), "s", "amb gamma=", 0.25)
+    print(f"El temps òptim per les condicions del problema és {t_opt*t_0:.3f} ± {incertesa:.3f} s", "amb gamma=", 0.25)
     col_opt=int(t_opt/Dt)
     T_opt=Ta[:,col_opt]
     plt.title("Perfil de temperatures per $t_{opt}$")
