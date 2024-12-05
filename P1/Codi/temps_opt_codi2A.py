@@ -61,10 +61,10 @@ if t_opt is not None:
     print("el temps òptim per les condicions del problema és",(t_opt*t_0,"±",incertesa), "s", "amb gamma=", 0.25)
     col_opt=int(t_opt/Dt)
     T_opt=Ta[:,col_opt]
-    plt.title("Perfil de temperatures per t_opt")
+    plt.title("Perfil de temperatures per $t_{opt}$")
     plt.tick_params(axis='both', direction='in')
     plt.xlabel('x (cm)')
-    plt.ylabel('T(x,t_opt) (K)')
+    plt.ylabel('T(x,$t_{opt}$) (K)')
     plt.plot(z*2, T_opt, label="Solució numèrica per $\gamma=0.25$")
     plt.axvline(0.75, linestyle='--', color="red", label="Teixit malalt")
     plt.axvline(1.25, linestyle='--', color="red")
