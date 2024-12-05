@@ -1,3 +1,3 @@
-Heu d'agafar l´última versió de cada codi.
-Primer heu d'executar la de P1_MN2_vN.py, on N és el nombre més alt que hi ha.
-Es guardrà un arxiu .text en una matriu que després s'haurà d'usar en l'altre codi, el temps_opt_N ( on N és el nombre més alt que hi ha).
+Per visualitzar tot correctament, heu d'agafar l´última versió de cada codi.
+Primer heu d'executar l'arxiu de P1_MN2_vN.py, on N és el nombre més alt que hi ha.
+Llavors es guardarà un arxiu .txt en una matriu que després s'haurà d'usar en l'altre codi, el temps_opt_N ( on N és el nombre més alt que hi ha).
