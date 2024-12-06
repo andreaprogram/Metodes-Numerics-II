@@ -5,12 +5,6 @@ Created on Thu Nov 28 16:08:18 2024
 @author: andre
 """
 
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Nov 26 08:48:19 2024
-
-@author: andre
-"""
 
 import numpy as np
 import matplotlib.pyplot as plt
