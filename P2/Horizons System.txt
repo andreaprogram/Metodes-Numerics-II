@@ -1,0 +1,14 @@
+1. Posar en els ajustos
+
+Ephemeris Type: Vector table
+Target Body: Earth 2 
+Coordinate Center: Sun (body center) [500@10] 3 (s'ha de clickar a "Edit" i escriure "@sun" perquè el SR és el SOl)
+Time Specification: l'interval de temps que volguem
+Table Settings: default
+
+2. Clickar "Generate Ephemeris"
+
+3. Notació de l'arxiu .txt generat:
+  X,Y,Z = posició en x,y,z respecte del Sol
+  VX,VY,VZ = velocitat en x,y,z respecte del Sol
+
