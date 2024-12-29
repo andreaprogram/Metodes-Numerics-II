@@ -36,10 +36,6 @@ t_k=np.zeros(pasos)
 
 
 
-import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.ticker import ScalarFormatter
-
 # Constants de normalització
 def definir_constants():
     t_0 = 3600  # temps d'una hora en segons
