@@ -1,0 +1,87 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+
+# Constants
+latitud = 41 + 39 / 60 + 55.115 / 3600  # Latitud de Bigues i Riells en graus
+latitud_rad = np.radians(latitud)       # Latitud en radians
+dies_any = 365                           # Todo un año
+hores_dia = 24                           # Hores en un dia
+
+# Funció per calcular la declinació solar
+def declinacio(dia):
+    return np.radians(23.45 * np.sin(np.radians(360 * (284 + dia) / 365)))
+
+# Funció per calcular l'angle horari
+def angle_horari(hora):
+    return np.radians(15 * (hora - 12))
+
+# Funció per calcular l'angle d'elevació solar
+def elevacio_solar(delta, omega):
+    sin_elevacio = np.sin(latitud_rad) * np.sin(delta) + np.cos(latitud_rad) * np.cos(delta) * np.cos(omega)
+    return np.arcsin(sin_elevacio)  # En radians
+
+# Generar posicions del sol per a cada hora i dia
+sol_positions = []
+for dia in range(1, dies_any + 1):
+    delta = declinacio(dia)
+    daily_positions = []
+    for hora in range(hores_dia):
+        omega = angle_horari(hora)
+        elevacio = elevacio_solar(delta, omega)
+        if elevacio > 0:  # Sol per sobre de l'horitzó
+            azimut = np.arctan2(np.sin(omega), np.cos(omega) * np.sin(latitud_rad) - np.tan(delta) * np.cos(latitud_rad))
+            x = np.cos(elevacio) * np.sin(azimut)
+            y = np.cos(elevacio) * np.cos(azimut)
+            daily_positions.append((x, y, elevacio))
+        else:
+            daily_positions.append((np.nan, np.nan, np.nan))
+    sol_positions.append(daily_positions)
+
+sol_positions = np.array(sol_positions)
+
+# Función para dibujar rayos solares alrededor del sol
+def draw_sun_rays(ax, x, y):
+    """Dibuja rayos solares alrededor del sol"""
+    radius = 0.1  # radio de los rayos
+    for angle in np.linspace(0, 2 * np.pi, 12):  # 12 rayos solares
+        ax.plot([x, x + radius * np.cos(angle)],
+                [y, y + radius * np.sin(angle)], color='gold', lw=2)
+
+# Crear una función para actualizar la animación y mostrar la posición del sol
+def update(frame):
+    dia = frame // hores_dia
+    hora = frame % hores_dia
+    sol_pos = sol_positions[dia, hora]
+
+    # Limpiar el gráfico para la próxima actualización
+    ax.clear()
+
+    # Establecer los límites y etiquetas del gráfico
+    ax.set_xlim([-1, 1])
+    ax.set_ylim([-1, 1])
+    ax.set_xlabel("Azimut (Eje X)")
+    ax.set_ylabel("Altitud (Eje Y)")
+    ax.set_title(f"Movimiento del Sol desde la Casa\nDía: {dia + 1} - Hora: {hora}:00")
+
+    # Traza el Sol en su posición actual
+    if not np.isnan(sol_pos[0]) and not np.isnan(sol_pos[1]):
+        ax.plot(sol_pos[0], sol_pos[1], 'yo', markersize=10, label="Sol")
+        draw_sun_rays(ax, sol_pos[0], sol_pos[1])  # Dibujar rayos solares
+
+    # Mostrar el temporizador (hora y día)
+    ax.text(0.5, 0.95, f"Día: {dia + 1}, Hora: {hora}:00", ha='center', va='top', fontsize=12)
+
+    # Mostrar la leyenda
+    ax.legend()
+
+# Configuración de la figura para la animación
+fig, ax = plt.subplots(figsize=(8, 6))
+
+# Crear la animación
+ani = FuncAnimation(fig, update, frames=dies_any * hores_dia, interval=50, blit=False)
+
+# Guardar video de la animación para todo el año
+ani.save("sol_pov_year_no_trail.mp4", writer="ffmpeg")
+
+plt.show()
