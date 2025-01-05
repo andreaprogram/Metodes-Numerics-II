@@ -21,9 +21,9 @@ def angle_horari(hora):
 # Funció per calcular l'angle d'elevació solar
 def elevacio_solar(delta, omega):
     sin_elevacio = np.sin(latitud_rad) * np.sin(delta) + np.cos(latitud_rad) * np.cos(delta) * np.cos(omega)
-    return np.arcsin(sin_elevacio)  # En radians
+    return np.arcsin(sin_elevacio)  # Està en radians
 
-# Funció per calcular el cos de l'angle d'incidència
+# Funció per calcular el cosinus de l'angle d'incidència
 def cos_theta_i(delta, omega):
     term1 = np.sin(delta) * np.sin(latitud_rad) * np.cos(beta)
     term2 = -np.sin(delta) * np.cos(latitud_rad) * np.sin(beta) * np.cos(gamma)
@@ -32,10 +32,10 @@ def cos_theta_i(delta, omega):
     term5 = np.cos(delta) * np.sin(beta) * np.sin(gamma) * np.sin(omega)
     return term1 + term2 + term3 + term4 + term5
 
-# Vector per emmagatzemar resultats
+# Vector on emmagatzemem els resultats
 angles_incidents = []
-h=  395   #altura muntanya
-L= 4.68e3    #distància muntanya
+h=  395   #Altura muntanya (en [m])
+L= 4.68e3    #Distància muntanya (en [m])
 sigma=np.arctan(h/L)
 # Simulació al llarg de l'any
 for dia in range(1, dies_any + 1):
@@ -48,16 +48,15 @@ for dia in range(1, dies_any + 1):
             cos_theta = cos_theta_i(delta, omega)
             theta_i = np.degrees(np.arccos(cos_theta)) if -1 <= cos_theta <= 1 else np.nan
         else:
-            theta_i = np.nan  # Sol sota l'horitzó, angle d'incidència inexistent
+            theta_i = np.nan  # Com el sol es troba sota l'horitzó, l'angle d'incidència és inexistent
         angles_dia.append(theta_i)
     angles_incidents.append(angles_dia)
 
 angles_incidents = np.array(angles_incidents)
 
-# Gràfic 3D de l'angle d'incidència
+# Realitzem el gràfic 3D de l'angle d'incidència
 fig = plt.figure(figsize=(12, 8))
 ax = fig.add_subplot(111, projection='3d')
-
 
 
 # Eixos
@@ -65,6 +64,7 @@ dies = np.arange(1, dies_any + 1)
 hores = np.arange(hores_dia)
 X, Y = np.meshgrid(dies, hores)
 Z = angles_incidents.T
+
 
 # Superfície 3D
 surf = ax.plot_surface(X, Y, Z, cmap='viridis', edgecolor='none')
@@ -74,6 +74,7 @@ ax.set_xlabel("Dia de l'any")
 ax.set_ylabel("Hora del dia")
 ax.set_zlabel(r"$\theta_i$ (º)")
 plt.show()
+
 
 # Gràfic per a un dia concret
 dia_concret = 1  # Podem anar posant el que volguem
