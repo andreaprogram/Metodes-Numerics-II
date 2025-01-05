@@ -32,7 +32,7 @@ def cos_theta_i(delta, omega):
     term5 = np.cos(delta) * np.sin(beta) * np.sin(gamma) * np.sin(omega)
     return term1 + term2 + term3 + term4 + term5
 
-# Vector per emmagatzemar resultats
+# Vector per emmagatzemar els resultats
 angles_incidents = []
 
 # Simulació al llarg de l'any
