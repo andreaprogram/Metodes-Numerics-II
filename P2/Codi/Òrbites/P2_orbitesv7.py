@@ -1,17 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Jan  5 20:41:52 2025
 
-@author: andre
-"""
-
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Dec  6 20:01:29 2024
-
-@author: davidrosamolina
-"""
 
 #Càlcul òrbites
 import numpy as np
@@ -21,7 +8,7 @@ from matplotlib.ticker import ScalarFormatter
 
 
 
-#constants normalització-------------------------------------------------------
+#Constants de normalització
 t_0=3600 #temps d'una hora en s
 d_0= 1.496e11 #distància mitja T-S en m
 M_sol=1.98840e30 #massa sol en kg
@@ -41,7 +28,8 @@ def acceleracio(r):
 
 
 pasos= int(T/dt)
-#definim quantitats i condicions inicials--------------------------------------
+
+#Definim quantitats i condicions inicials
 r_e=np.zeros((pasos,2)) #dos dimensions
 v_e=np.zeros((pasos,2))
 t=np.zeros(pasos)
@@ -53,7 +41,7 @@ t_k=np.zeros(pasos)
 
 
 
-# CONDICIONS INICIALS--------------------------------
+# Condicions inicials--------------------------------
 
 r_0=np.array([-2.546e10/d_0,1.449e11/d_0])
 v_0=np.array([-2.982e4*t_0/d_0,-5.280e3*t_0/d_0])
@@ -109,7 +97,7 @@ for j in range(1,pasos):
     v_e[j]= v_e[j-1] + a*dt #component x
     r_e[j]=r_e[j-1]+v_e[j]*dt
     
-#SOLUCIÓ ANALÍTICA-----------------------------------------------------------
+#Solució analítica-----------------------------------------------------------
 
 def r(theta):
     h = 4.45808e15  
@@ -128,7 +116,7 @@ y_an = r_values * np.sin(theta_dib)
 
 
 
-#plot--------------------------------------------------------------------------
+#Plot--------------------------------------------------------------------------
 plt.figure(figsize=(8, 8))
 plt.plot(r_e[:,0]*d_0, r_e[:,1]*d_0, label="Euler")
 plt.plot(r_k[:,0]*d_0, r_k[:,1]*d_0, label="RK-4")
@@ -155,7 +143,7 @@ ax.yaxis.set_major_formatter(formatter)
 plt.show()
 
 
-#CÀLCUL D'ERRORS-------------------------------------------
+#Càlcul d'errors-------------------------------------------
 re_norm = np.sqrt((r_e[:, 0]*d_0)**2 + (r_e[:, 1]*d_0)**2)
 rk_norm = np.sqrt((r_k[:, 0]*d_0)**2 + (r_k[:, 1]*d_0)**2)
 
@@ -168,7 +156,7 @@ plt.legend(loc='upper right')
 plt.xlabel(r'$\theta$ (rad)')
 plt.ylabel('Error absolut')
 
-# Aplicar notació científica als eixos
+# Apliquem la notació científica als eixos
 formatter = ScalarFormatter(useMathText=True)
 formatter.set_scientific(True)
 formatter.set_powerlimits((-2, 2))
@@ -189,9 +177,9 @@ plt.show()
 
 
 
-#fem la rotació d'eixos i canvi de sistema de referència
+#Fem la rotació d'eixos i canvi de sistema de referència
 
-#angles i constants------------------------------------------------------------
+#Angles i constants------------------------------------------------------------
 alfa=23.4*2*np.pi/360
 
 theta=np.pi/180*(41 + 39 / 60 + 55.115 / 3600)
@@ -199,7 +187,7 @@ Rt=12.756e3/2
 w= 7.272e-5*t_0 #rad/h
 phi=2.183008324
 
-#tot en radians per utilitzar np.funcions trigonometriques.
+#Tot en radians per utilitzar np.funcions trigonomètriques
 
 def R_bigues(t): #vector posició bigues pel centre de la terra amb eixos ja rotats
     x=Rt*(np.cos(theta)*np.cos(phi+w*t))
@@ -209,14 +197,14 @@ def R_bigues(t): #vector posició bigues pel centre de la terra amb eixos ja rot
     return x,y,z
 
 
-#ara fem el vector posició de bigues pel centre del sol
+#Ara fem el vector posició de Bigues pel centre del sol
 
 
 rx = np.zeros(pasos)
 ry = np.zeros(pasos)
 rz = np.zeros(pasos)
 
-#on es troba la terra quan t=0
+#On es troba la terra quan t=0
 rx[0]=np.array(-2.546e10+Rt*(np.cos(theta)*np.cos(phi)))
 ry[0]=np.array(1.449e11+Rt*(np.cos(theta)*np.sin(phi)*np.cos(alfa)+np.sin(theta)*np.sin(alfa)))
 rz[0]=np.array(Rt*(np.sin(theta)*np.cos(alfa)))
@@ -245,9 +233,7 @@ plt.show()
 
 
 
-
-
-# Guardem coordenades
+# Guardem les coordenades
 filename = 'coordenades_bigues_sol.txt'
 
 
@@ -259,20 +245,20 @@ np.savetxt(filename, data, header="rx (m), ry (m), rz (m)", fmt='%.6e')
 
 
 
-#volem veure el sol respecte habitatge
+#Volem veure el sol respecte habitatge
 
 fig = plt.figure(figsize=(8, 8))
 ax = fig.add_subplot(111, projection='3d')
 
 ax.plot(-rx, -ry, -rz, label="Trajectòria del Sol", linewidth=1)
 
-#sol
+#Sol
 ax.scatter(0, 0, 0, s=200, color='green', label="Bigues i Riells del Fai")
 
 max_val = np.max([np.max(rx), np.max(ry), np.max(rz)])
 min_val = np.min([np.min(rx), np.min(ry), np.min(rz)])
 
-# ajustem eixos z
+# Ajustem eixos z
 ax.set_xlim([min(rx), max(rx)])
 ax.set_ylim([min(ry), max(ry)])
 ax.set_zlim([min_val, max_val])  
