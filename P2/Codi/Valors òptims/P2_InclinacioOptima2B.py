@@ -59,7 +59,7 @@ def calcular_potencia(angle_incident, N):
     return P
 
 # Vector per a provar diferents inclinacions (en graus)
-betas = np.arange(38, 39, 0.01)  
+betas = np.arange(37, 38, 0.01)  
 potencies_totals = []
 
 h=  395   #Altura muntanya [m]
@@ -107,7 +107,7 @@ print(f"La potència màxima anual és: {potencia_maxima:.2f} W")
 plt.figure(figsize=(10, 6))
 plt.plot(betas, potencies_totals, marker='o')
 plt.title("Potència total anual en funció de la inclinació (\u03B2)")
-plt.xlabel("Inclinació (\u03B2) [graus]")
+plt.xlabel("Inclinació (\u03B2) [ºC]")
 plt.ylabel("Potència total anual [W]")
 plt.grid(True)
 plt.show()
