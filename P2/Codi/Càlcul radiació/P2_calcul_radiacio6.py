@@ -1,11 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Sun Dec 29 23:37:19 2024
-
-@author: davidrosamolina
-"""
-
 import numpy as np
 import matplotlib.pyplot as plt
 data = np.loadtxt('coordenades_bigues_sol.txt', comments='#', delimiter=' ')
@@ -22,7 +14,7 @@ A=2
 N1=1
 
 
-def calcular_potencia(angle_incident,N): #per a cada arxiu txt
+def calcular_potencia(angle_incident,N): #Per a cada arxiu .txt
     P = np.zeros_like(angle_incident)
     
     for dia in range(P.shape[0]):
@@ -37,24 +29,21 @@ angle_incident = np.nan_to_num(angle_incident, nan=90)
 P = calcular_potencia(angle_incident,N1)
 
 
-# Combinar las potencias
-
 dies = np.arange(1, P.shape[0] + 1)  
 hores = np.arange(24) 
-X, Y = np.meshgrid(dies, hores)  #mallat 
-Z = P.T  # trsposa
-
+X, Y = np.meshgrid(dies, hores)  #Mallat 
+Z = P.T  # Trasposa la matriu
 
 
 fig = plt.figure(figsize=(12, 8))
 ax = fig.add_subplot(111, projection='3d')
 
 surf = ax.plot_surface(X, Y, Z, cmap='plasma', edgecolor='none')
-fig.colorbar(surf, ax=ax, label="Potència generada(W)")
+fig.colorbar(surf, ax=ax, label="Potència generada [W]")
 ax.set_title("Potència generada durant 1 any")
 ax.set_xlabel("Dia")
 ax.set_ylabel("Hora")
-ax.set_zlabel("Potència generada (W)")
+ax.set_zlabel("Potència generada [W]")
 plt.show()
 
 
