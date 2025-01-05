@@ -69,7 +69,7 @@ Z = angles_incidents.T
 # Superfície 3D
 surf = ax.plot_surface(X, Y, Z, cmap='viridis', edgecolor='none')
 fig.colorbar(surf, ax=ax, label=r"$\theta_i$ (º)")
-ax.set_title("Gràfic 3D de l'angle d'incidència corregit")
+ax.set_title("Gràfic 3D de l'angle d'incidència")
 ax.set_xlabel("Dia de l'any")
 ax.set_ylabel("Hora del dia")
 ax.set_zlabel(r"$\theta_i$ (º)")
