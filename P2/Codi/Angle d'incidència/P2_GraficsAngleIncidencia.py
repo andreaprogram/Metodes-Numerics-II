@@ -50,8 +50,8 @@ ax = fig.add_subplot(111, projection='3d')
 
 # Eixos
 dies = np.arange(1, dies_any + 1)
-ores = np.arange(hores_dia)
-X, Y = np.meshgrid(dies, ores)
+hores = np.arange(hores_dia)
+X, Y = np.meshgrid(dies, hores)
 Z = angles_incidents.T
 
 # Superfície 3D
@@ -64,7 +64,7 @@ ax.set_zlabel(r"$\theta_i$ (º)")
 plt.show()
 
 # Gràfic per a un dia concret
-dia_concret = 172  # Per exemple, dia 172 (21 de juny, solstici d'estiu)
+dia_concret = 172  # Per exemple dia 172 (21 de juny, solstici d'estiu)
 angles_dia = angles_incidents[dia_concret - 1, :]
 
 plt.figure(figsize=(10, 6))
