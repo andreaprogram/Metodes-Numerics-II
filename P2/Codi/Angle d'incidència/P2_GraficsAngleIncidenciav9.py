@@ -5,7 +5,7 @@ from mpl_toolkits.mplot3d import Axes3D
 # Constants
 latitud = 41 + 39 / 60 + 55.115 / 3600  # Latitud de Bigues i Riells en graus
 latitud_rad = np.radians(latitud)       # Latitud en radians
-beta = np.radians(38.0)                    # Inclinació del panell en radians 
+beta = np.radians(37.94)                    # Inclinació del panell en radians 
 gamma = np.radians(0)                 # Panell orientat cap al sud
 dies_any = 365                          # Dies en un any
 hores_dia = 24                          # Hores en un dia
